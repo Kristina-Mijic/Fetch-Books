@@ -1,1 +1,192 @@
-/* No CSS *//*# sourceMappingURL=design.css.map */
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #DFD3C3;
+}
+
+.header-wrapper {
+  width: 100%;
+  background-color: #73777B;
+}
+
+.header-wrapper .header-top {
+  height: 90px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-wrapper .header-top .header-logo {
+  width: 100px;
+}
+
+.header-wrapper .header-top .header-logo img {
+  width: 100%;
+}
+
+.header-wrapper .header-input-wrapper {
+  display: flex;
+}
+
+.header-wrapper .header-input-wrapper .header-input {
+  width: 250px;
+  height: 30px;
+  outline: none;
+}
+
+.header-wrapper .header-input-wrapper .header-input-btn {
+  width: 50px;
+  height: 28px;
+  position: relative;
+  right: 51px;
+  cursor: pointer;
+  background-color: #EC994B;
+  border: none;
+  bottom: -1px;
+}
+
+.header-wrapper .header-input-wrapper .header-input-btn i {
+  color: #fff;
+}
+
+.header-wrapper .header-nav-menu-wrapper {
+  background-color: #fff;
+  padding: 15px;
+}
+
+.header-wrapper .header-nav-menu-wrapper .nav-menu {
+  display: flex;
+  font-size: 20px;
+  list-style: none;
+  color: #73777B;
+}
+
+.header-wrapper .header-nav-menu-wrapper .nav-menu .menu-item {
+  margin-right: 30px;
+  cursor: pointer;
+  font-weight: 100;
+}
+
+.header-wrapper .header-nav-menu-wrapper .menu-item:hover {
+  color: #EC994B;
+}
+
+.home-body-wrapper .swiper {
+  width: 70%;
+  overflow: hidden;
+  height: 400px;
+  margin-bottom: 100px;
+}
+
+.home-body-wrapper .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-body-wrapper .swiper-slide .swiper-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.home-body-wrapper .books-wrapper {
+  margin-bottom: 50px;
+}
+
+.home-body-wrapper .books-wrapper .new-book-title {
+  font-size: 25px;
+  color: #73777B;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.home-body-wrapper .books-wrapper .new-book-title::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: #EC994B;
+  display: block;
+}
+
+.home-body-wrapper .books-wrapper .books-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  width: 100%;
+}
+
+.home-body-wrapper .books-wrapper .books-cards .card {
+  background-color: #fff;
+  text-align: center;
+}
+
+.home-body-wrapper .books-wrapper .books-cards .card .book-photo {
+  margin-bottom: 8px;
+  padding: 10px 10px 0;
+}
+
+.home-body-wrapper .books-wrapper .books-cards .card img {
+  width: 100%;
+}
+
+.home-body-wrapper .books-wrapper .card .book-card-title {
+  font-size: 20px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.home-body-wrapper .books-wrapper .card .book-card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-top: 1px solid #73777B;
+}
+
+.home-body-wrapper .books-wrapper .card .book-card-price .price {
+  position: relative;
+  font-weight: 300;
+}
+
+.home-body-wrapper .books-wrapper .card .book-card-price .price::after {
+  content: "";
+  width: 1px;
+  height: 43px;
+  position: absolute;
+  background-color: #000;
+  bottom: -10px;
+  right: -120px;
+}
+
+.home-body-wrapper .books-wrapper .card .book-card-price .buy-icon {
+  cursor: pointer;
+}
+
+.home-body-wrapper .books-wrapper .card .book-card-price .buy-icon:hover {
+  color: #EC994B;
+}
+/*# sourceMappingURL=design.css.map */

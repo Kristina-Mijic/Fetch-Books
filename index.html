@@ -5,11 +5,88 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="design.css">
-  <title>Fetch Books-exercises</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+ <title>Fetch Books-exercises</title>
 </head>
 <body>
+  <header class="header-wrapper">
+    <div class="container">
+      <div class="header-top">
+        <img src="./logo-books.png" alt="" class="header-logo">
+        <div class="header-input-wrapper">
+          <input type="text" name="" id="" class="header-input" placeholder="Search">
+          <button class="header-input-btn"><i class="fa-solid fa-magnifying-glass" class="header-btn-icon"></i> </button>     
+        </div>
+      </div>
+    </div>
+
+    <nav class="header-nav-menu-wrapper">
+      <div class="container">
+        <ul class="nav-menu">
+          <li class="menu-item">Home</li>
+          <li class="menu-item">Books</li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <section class="home-body-wrapper">
+    <div class="container">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img class="swiper-photo" src="./slide1.jpeg" alt=""></div>
+          <div class="swiper-slide"><img class="swiper-photo" src="./slide2.jpeg" alt=""></div>
+          <div class="swiper-slide"><img class="swiper-photo" src="./slide3.jpeg" alt=""></div>
+          <div class="swiper-slide"><img class="swiper-photo" src="./slide4.webp" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <!--New Books-->
+      <div class="new-books-wrapper books-wrapper">
+        <div class="container">
+          <h2 class="new-book-title">New Books</h2>
+          <div class="books-cards">
+
+            <div class="card">
+              <img src="./anna-karenina.jpeg" alt="book-photo" class="book-photo">
+              <h2 class="book-card-title">Anna Karenina</h2>
+              <div class="book-card-price">
+                <p class="price">$12.49</p>
+                <i class="fa-solid fa-cart-shopping buy-icon"></i>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
+      <!--Best selling books-->
+      <div class="new-books-wrapper books-wrapper">
+        <div class="container">
+          <h2 class="new-book-title" id="selling-book-title">Best selling books</h2>
+          <div class="books-cards" id="selling-book-cards">
+
+            <div class="card" id="selling-book">
+              <img src="./anna-karenina.jpeg" alt="book-photo" class="book-photo" id="selling-photo">
+              <h2 class="book-card-title" id="selling-card-title">Anna Karenina</h2>
+              <div class="book-card-price">
+                <p class="price" id="price">$12.49</p>
+                <i class="fa-solid fa-cart-shopping buy-icon"></i>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+    </div> 
+  </section>
+ 
   
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
