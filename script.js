@@ -4,18 +4,19 @@ let booksPage = document.getElementById('books-page');
 let homePage = document.getElementById('home-page');
 let homeBodyWrapper = document.getElementById('home-body-wrapper');
 
-let copyArr = (inArr) => {
+let copyApiArr = (inArr) => {
   let arr = [];
 
   for(i = 0; i < inArr.length; i++) {
     arr.push(inArr[i]);
-    // console.log({arr})
   }
+  //forEach
   return arr;
 }
 
 let getRandomFourElem = (inArr) => {
-  let arrCopy = copyArr(inArr);
+  let arrCopy = copyApiArr(inArr);
+  //ArrayFrom()
   let newItems = [];
 
   for(let i = 0; i < 4; i++) {
@@ -25,6 +26,29 @@ let getRandomFourElem = (inArr) => {
   }
   return newItems;
 }
+
+
+//Sort Array from rating:
+let sortArrayOnRating = (sort) => {
+  let sortArr = getRandomFourElem(sort);
+
+  let compare = (a,b) => {
+    if ( a.rating > b.rating ){
+      return -1;
+    }
+    if ( a.rating < b.rating ){
+      return 1;
+    }
+    return 0;
+  }
+  
+  sortArr.sort(compare);
+  sortArr.slice(compare, 1)
+  console.log({sortArr})
+
+  return sortArr;
+}
+
 
 let fetchData = async() => {
   const response = await fetch(
@@ -36,20 +60,24 @@ let fetchData = async() => {
       }
     }
   );
+
   const data = await response.json();
-  let dataApi = data.record.results;
-  let copyDataApi = getRandomFourElem(dataApi)
+  let dataApiOriginal = data.record.results;
 
-  let templateCards = templateNewBooks(copyDataApi);
+  let copyDataApi = getRandomFourElem(dataApiOriginal);
+  let apiRating = sortArrayOnRating(dataApiOriginal);
 
-  newBooksCardsWrapper.innerHTML = templateCards;
-  // sellingBooksCards.innerHTML = templateCards;
+  let templateCardsNewBooks = templateBooks(copyDataApi);
+  let templateSellingBooks = templateBooks(apiRating);
+
+  newBooksCardsWrapper.innerHTML = templateCardsNewBooks;
+  sellingBooksCards.innerHTML = templateSellingBooks;
 };
 fetchData()
 
 
-//Create template for lists all 'new books' cards:
-let templateNewBooks = (data) => {
+//Create template for lists all 'new books' and 'selling books' cards:
+let templateBooks = (data) => {
   let templateCards = '';
   data.map(e => {
     templateCards +=
