@@ -87,6 +87,70 @@ body {
   color: #EC994B;
 }
 
+.books-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 30px;
+  width: 100%;
+}
+
+.books-cards .card {
+  background-color: #fff;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.books-cards .card .book-photo {
+  margin-bottom: 10px;
+  padding: 10px 10px 0;
+}
+
+.books-cards .card img {
+  width: 100%;
+  height: 70%;
+}
+
+.card .book-card-title {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 20px;
+  min-height: 70px;
+  max-height: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+}
+
+.card .book-card-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-top: 1px solid #73777B;
+}
+
+.card .book-card-rating .rating {
+  position: relative;
+  font-weight: 300;
+}
+
+.card .book-card-rating .buy-icon {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.card .book-card-rating .buy-icon:hover {
+  color: #EC994B;
+}
+
 .home-body-wrapper .swiper {
   width: 70%;
   overflow: hidden;
@@ -129,77 +193,56 @@ body {
   display: block;
 }
 
-.home-body-wrapper .books-wrapper .books-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 30px;
-  width: 100%;
+.books-body-wrapper {
+  display: none;
+  padding: 40px 0;
 }
 
-.home-body-wrapper .books-wrapper .books-cards .card {
-  background-color: #fff;
-  text-align: center;
-  height: 100%;
-  width: 100%;
+.books-body-wrapper .books-page-wrapper {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-.home-body-wrapper .books-wrapper .books-cards .card .book-photo {
-  margin-bottom: 10px;
-  padding: 10px 10px 0;
+.books-body-wrapper .books-page-wrapper .books-page-categories {
+  margin-right: 100px;
 }
 
-.home-body-wrapper .books-wrapper .books-cards .card img {
-  width: 100%;
-  height: 70%;
-}
-
-.home-body-wrapper .books-wrapper .card .book-card-title {
-  font-size: 16px;
-  font-weight: 400;
-  padding: 0 20px;
-  min-height: 70px;
-  max-height: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-}
-
-.home-body-wrapper .books-wrapper .card .book-card-rating {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  font-size: 20px;
-  border-top: 1px solid #73777B;
-}
-
-.home-body-wrapper .books-wrapper .card .book-card-rating .rating {
-  position: relative;
+.books-body-wrapper .books-page-wrapper .books-page-categories .categories-title {
+  font-size: 25px;
+  margin-bottom: 30px;
   font-weight: 300;
+  text-decoration: underline;
 }
 
-.home-body-wrapper .books-wrapper .card .book-card-rating .rating::after {
-  content: "";
-  width: 1px;
-  height: 43px;
-  position: absolute;
-  background-color: #000;
-  bottom: -10px;
-  right: -75px;
+.books-body-wrapper .books-page-wrapper .books-page-categories .categories-items {
+  list-style: none;
 }
 
-.home-body-wrapper .books-wrapper .card .book-card-rating .buy-icon {
+.books-body-wrapper .books-page-wrapper .books-page-categories .categories-items .item {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 300;
   cursor: pointer;
-  font-size: 18px;
 }
 
-.home-body-wrapper .books-wrapper .card .book-card-rating .buy-icon:hover {
-  color: #EC994B;
+.books-body-wrapper .books-page-wrapper .books-page-categories .categories-items .item:hover {
+  text-decoration: underline;
+}
+
+.books-body-wrapper .books-page-wrapper .books-page-cards {
+  overflow: hidden;
+}
+
+.books-body-wrapper .books-page-wrapper .books-page-cards .cards-category-title {
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.books-body-wrapper .books-page-wrapper .books-page-cards .cards-category-title::after {
+  content: "";
+  width: 100vw;
+  height: 3px;
+  background-color: #EC994B;
+  display: block;
 }
 /*# sourceMappingURL=design.css.map */

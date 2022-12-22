@@ -3,6 +3,9 @@ let sellingBooksCards = document.getElementById('selling-book-cards');
 let booksPage = document.getElementById('books-page');
 let homePage = document.getElementById('home-page');
 let homeBodyWrapper = document.getElementById('home-body-wrapper');
+let booksPageBodyWrapper = document.getElementById('books-body-wrapper');
+let pageBooksCards = document.getElementById('page-books-cards');
+let genreBooksItem = document.getElementById('genre-id');
 
 let copyApiArr = (inArr) => {
   let arr = [];
@@ -26,7 +29,6 @@ let getRandomFourElem = (inArr) => {
   }
   return newItems;
 }
-
 
 //Sort Array from rating:
 let sortArrayOnRating = (sort) => {
@@ -69,14 +71,16 @@ let fetchData = async() => {
 
   let templateCardsNewBooks = templateBooks(copyDataApi);
   let templateSellingBooks = templateBooks(apiRating);
+  let templatePageAllCards = templateBooks(dataApiOriginal);
 
   newBooksCardsWrapper.innerHTML = templateCardsNewBooks;
   sellingBooksCards.innerHTML = templateSellingBooks;
+  pageBooksCards.innerHTML = templatePageAllCards;
 };
 fetchData()
 
 
-//Create template for lists all 'new books' and 'selling books' cards:
+//Create template for lists all books cards:
 let templateBooks = (data) => {
   let templateCards = '';
   data.map(e => {
@@ -97,10 +101,12 @@ let templateBooks = (data) => {
 
 booksPage.addEventListener('click', () => {
   homeBodyWrapper.style.display = 'none'
+  booksPageBodyWrapper.style.display = 'block'
 });
 
 homePage.addEventListener('click', () => {
   homeBodyWrapper.style.display = 'grid'
+  booksPageBodyWrapper.style.display = 'none'
 });
 
 //Created slider from home page:
