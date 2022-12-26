@@ -68,20 +68,24 @@
     <div class="container">
       <div class="books-page-wrapper">
 
-        <div class="books-page-categories">
+        <div class="books-page-categories ">
           <p class="categories-title">Categories</p>
           <ul class="categories-items">
-            <li class="item">All Books</li>
-            <li class="item" id="genre-id">Genre</li>
+            <li class="item" id="all-books-menu">All Books</li>
+            <li class="item dropdown-menu" id="genre-menu">Genre
+              <ul class="dropdown-content" id="genre-menu-items">
+                <!-- <a class="content">History</a> -->
+              </ul>
+            </li>
             <li class="item">Authors</li>
           </ul>
         </div>
 
         <div class="books-page-cards">
           <div class="container">
-            <h2 class="cards-category-title">All Books</h2>
-           <div class="books-cards" id="page-books-cards">
-           </div>
+            <h2 class="cards-category-title" id="main-title">All Books</h2>
+            <div class="books-cards" id="page-books-cards">
+            </div>
           </div>
         </div>
 

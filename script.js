@@ -5,7 +5,10 @@ let homePage = document.getElementById('home-page');
 let homeBodyWrapper = document.getElementById('home-body-wrapper');
 let booksPageBodyWrapper = document.getElementById('books-body-wrapper');
 let pageBooksCards = document.getElementById('page-books-cards');
-let genreBooksItem = document.getElementById('genre-id');
+let genreBooksMenu = document.getElementById('genre-menu');
+let mainBooksPageTitle = document.getElementById('main-title');
+let allBooksMenu = document.getElementById('all-books-menu');
+let menuGenreItemsWraper = document.getElementById('genre-menu-items');
 
 let copyApiArr = (inArr) => {
   let arr = [];
@@ -15,6 +18,26 @@ let copyApiArr = (inArr) => {
   }
   //forEach
   return arr;
+}
+
+//List genre Books
+let getGenreBooks = (genreParam) => {
+  let newGenreArr = new Set();
+  let newArr = []
+  
+  for(let i = 0; i < genreParam.length; i++) {
+    if(genreParam[i].genre !== '') {
+      newArr = genreParam[i].genre.split(",");
+
+      newArr.forEach(element => {
+        newGenreArr.add(element)
+      })
+
+    }
+  }
+  console.log(newGenreArr)
+
+  return [...newGenreArr];
 }
 
 let getRandomFourElem = (inArr) => {
@@ -44,12 +67,12 @@ let sortArrayOnRating = (sort) => {
     return 0;
   }
   
+  sortArr.slice(compare, 1);
   sortArr.sort(compare);
-  sortArr.slice(compare, 1)
   console.log({sortArr})
 
   return sortArr;
-}
+};
 
 
 let fetchData = async() => {
@@ -65,20 +88,35 @@ let fetchData = async() => {
 
   const data = await response.json();
   let dataApiOriginal = data.record.results;
+  console.log(dataApiOriginal)
 
   let copyDataApi = getRandomFourElem(dataApiOriginal);
   let apiRating = sortArrayOnRating(dataApiOriginal);
+  // let genreBooks = getGenreBooks(dataApiOriginal);
+  let genreItem = getGenreBooks(dataApiOriginal);
 
   let templateCardsNewBooks = templateBooks(copyDataApi);
   let templateSellingBooks = templateBooks(apiRating);
   let templatePageAllCards = templateBooks(dataApiOriginal);
+  // let templateGenreBooks = templateBooks(genreBooks);
+  let templateGenreItems = templateGenreItemsInMenu(genreItem)
 
   newBooksCardsWrapper.innerHTML = templateCardsNewBooks;
   sellingBooksCards.innerHTML = templateSellingBooks;
   pageBooksCards.innerHTML = templatePageAllCards;
+  menuGenreItemsWraper.innerHTML = templateGenreItems;
 };
-fetchData()
+fetchData();
 
+//Button to show just genre books
+genreBooksMenu.addEventListener('click', () => {
+  
+});
+
+//Button to show all books
+allBooksMenu.addEventListener('click', () => {
+  mainBooksPageTitle.innerHTML = 'All Books';
+});
 
 //Create template for lists all books cards:
 let templateBooks = (data) => {
@@ -98,6 +136,20 @@ let templateBooks = (data) => {
   })
   return templateCards;
 }; 
+
+//Create template for genre items in menu:
+let templateGenreItemsInMenu = (data) => {
+  console.log(data)
+  let templategenreItems = '';
+  data.map(e => {
+    templategenreItems +=
+    `
+    <a class="content">${e}</a>
+   `
+  })
+  
+  return templategenreItems;
+}
 
 booksPage.addEventListener('click', () => {
   homeBodyWrapper.style.display = 'none'

@@ -143,16 +143,6 @@ body {
     font-weight: 300;
   }
 
-  // .rating::after {
-  //   content: "";
-  //   width: 1px;
-  //   height: 43px;
-  //   position: absolute;
-  //   background-color: $black;
-  //   bottom: -10px;
-  //   right: -75px;
-  // }
-
   .buy-icon {
     cursor: pointer;
     font-size: 18px;
@@ -240,7 +230,32 @@ body {
         text-decoration: underline;
       }
     }
+
+    .dropdown-menu {
+      position: relative;
+      display: inline-block;
+    }
   }
+
+  .dropdown-menu .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 15px 10px;
+    overflow: scroll;
+    max-height: 400px;
+  }
+
+  .dropdown-content a {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .dropdown-menu:hover .dropdown-content {display: grid;}
+  .dropdown-content a:hover {background-color: #ddd;}
 
   .books-page-wrapper .books-page-cards {
     overflow: hidden;
