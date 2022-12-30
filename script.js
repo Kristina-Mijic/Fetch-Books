@@ -9,6 +9,11 @@ let genreBooksMenu = document.getElementById('genre-menu');
 let mainBooksPageTitle = document.getElementById('main-title');
 let allBooksMenu = document.getElementById('all-books-menu');
 let menuGenreItemsWraper = document.getElementById('genre-menu-items');
+let singleBookWrapper = document.getElementById('single-book-wrapper');
+
+
+let data = [];
+let dataApiOriginal = [];
 
 let copyApiArr = (inArr) => {
   let arr = [];
@@ -23,22 +28,20 @@ let copyApiArr = (inArr) => {
 //List genre Books
 let getGenreBooks = (genreParam) => {
   let newGenreArr = new Set();
-  let newArr = []
+  let newArr = [];
   
   for(let i = 0; i < genreParam.length; i++) {
     if(genreParam[i].genre !== '') {
       newArr = genreParam[i].genre.split(",");
 
       newArr.forEach(element => {
-        newGenreArr.add(element)
+        newGenreArr.add(element);
       })
-
     }
   }
-  console.log(newGenreArr)
-
   return [...newGenreArr];
 }
+
 
 let getRandomFourElem = (inArr) => {
   let arrCopy = copyApiArr(inArr);
@@ -53,6 +56,7 @@ let getRandomFourElem = (inArr) => {
   return newItems;
 }
 
+
 //Sort Array from rating:
 let sortArrayOnRating = (sort) => {
   let sortArr = getRandomFourElem(sort);
@@ -61,18 +65,16 @@ let sortArrayOnRating = (sort) => {
     if ( a.rating > b.rating ){
       return -1;
     }
-    if ( a.rating < b.rating ){
-      return 1;
-    }
     return 0;
   }
   
   sortArr.slice(compare, 1);
   sortArr.sort(compare);
-  console.log({sortArr})
+  // console.log({sortArr})
 
   return sortArr;
 };
+
 
 
 let fetchData = async() => {
@@ -86,37 +88,28 @@ let fetchData = async() => {
     }
   );
 
-  const data = await response.json();
-  let dataApiOriginal = data.record.results;
-  console.log(dataApiOriginal)
+  data = await response.json();
+  dataApiOriginal = data.record.results;
 
   let copyDataApi = getRandomFourElem(dataApiOriginal);
   let apiRating = sortArrayOnRating(dataApiOriginal);
-  // let genreBooks = getGenreBooks(dataApiOriginal);
   let genreItem = getGenreBooks(dataApiOriginal);
 
   let templateCardsNewBooks = templateBooks(copyDataApi);
   let templateSellingBooks = templateBooks(apiRating);
   let templatePageAllCards = templateBooks(dataApiOriginal);
-  // let templateGenreBooks = templateBooks(genreBooks);
-  let templateGenreItems = templateGenreItemsInMenu(genreItem)
+  let templateGenreItems = templateGenreItemsInMenu(genreItem);
 
   newBooksCardsWrapper.innerHTML = templateCardsNewBooks;
   sellingBooksCards.innerHTML = templateSellingBooks;
   pageBooksCards.innerHTML = templatePageAllCards;
   menuGenreItemsWraper.innerHTML = templateGenreItems;
+  openSingleBookPage()
+  
 };
 fetchData();
 
-//Button to show just genre books
-genreBooksMenu.addEventListener('click', () => {
-  
-});
 
-//Button to show all books
-allBooksMenu.addEventListener('click', () => {
-  mainBooksPageTitle.innerHTML = 'All Books';
-});
 
 //Create template for lists all books cards:
 let templateBooks = (data) => {
@@ -124,8 +117,8 @@ let templateBooks = (data) => {
   data.map(e => {
     templateCards +=
     `
-    <div class="card" id="new-books-card">
-      <img src="${e.img}" alt="book-photo" class="book-photo">
+    <div class="card" id="title">
+      <img src="${e.img}" id="${e.title}" alt="book-photo" class="book-photo">
       <h2 class="book-card-title">${e.title}</h2>
       <div class="book-card-rating">
         <p class="rating">rating: ${e.rating}</p>
@@ -133,15 +126,17 @@ let templateBooks = (data) => {
       </div>
     </div>
    `
-  })
+  });
+ 
   return templateCards;
 }; 
 
+
 //Create template for genre items in menu:
 let templateGenreItemsInMenu = (data) => {
-  console.log(data)
   let templategenreItems = '';
-  data.map(e => {
+
+  data.sort().map(e => {
     templategenreItems +=
     `
     <a class="content">${e}</a>
@@ -151,15 +146,76 @@ let templateGenreItemsInMenu = (data) => {
   return templategenreItems;
 }
 
-booksPage.addEventListener('click', () => {
-  homeBodyWrapper.style.display = 'none'
-  booksPageBodyWrapper.style.display = 'block'
-});
+
+//Create template for single book page:
+let templateSingleBookPage = (dataParamId) => {
+  let bookData = dataApiOriginal.filter(data => data.title.trim() == dataParamId)[0]
+
+  let templateSingleBook = '';
+  templateSingleBook =
+  `
+    <div class="book-info-wrapper">
+      <div class="book-wrapper">
+        <div class="book-photo">
+          <img src="${bookData.img}" alt="single-book-page">
+        </div>
+        <div class="book-info">
+          <h1 class="book-info-title title-line">${bookData.title}</h1>
+          <p class="info">AUTHOR: <span>${bookData.author}</span></p>
+          <p class="info">GENRE: <span>${bookData.genre}</span></p>
+          <p class="info">PAGES: <span>${bookData.pages}</span></p>
+        </div>
+      </div>
+      <div class="single-book-description-wrapper">
+        <h2 class="single-book-desc-title title-line">Description</h2>
+        <p class="single-book-desc-text">${bookData.desc}</p>
+        <button class="btn-back" id="btn-back">Back</button>
+      </div>
+    </div>
+  `
+  return templateSingleBook;
+}
+
+//Open Single Book page:
+let openSingleBookPage = () => {
+  let cardsBook = document.querySelectorAll('.card');
+
+  cardsBook.forEach(card => {
+    card.addEventListener('click', (e) => {
+      homeBodyWrapper.style.display = 'none';
+      singleBookWrapper.style.display = 'flex';
+      booksPageBodyWrapper.style.display = 'none';
+      let cardId = e.target.id;
+      singleBookWrapper.innerHTML = templateSingleBookPage(cardId);
+      backPreviousPage()
+    })
+  })
+};
+
+//Previous button on Single Book Page
+let backPreviousPage = () => {
+  let btnBack = document.getElementById('btn-back');
+
+  btnBack.addEventListener('click', () => {
+    console.log('click')
+    singleBookWrapper.style.display = 'none';
+    homeBodyWrapper.style.display = 'flex';
+  })
+}
 
 homePage.addEventListener('click', () => {
-  homeBodyWrapper.style.display = 'grid'
-  booksPageBodyWrapper.style.display = 'none'
+  homeBodyWrapper.style.display = 'grid';
+  booksPageBodyWrapper.style.display = 'none';
+  singleBookWrapper.style.display = 'none';
 });
+
+
+booksPage.addEventListener('click', () => {
+  homeBodyWrapper.style.display = 'none';
+  booksPageBodyWrapper.style.display = 'block';
+  singleBookWrapper.style.display = 'none';
+});
+
 
 //Created slider from home page:
 let swiper = new Swiper(".mySwiper", {

@@ -94,6 +94,7 @@ body {
   grid-column-gap: 20px;
   grid-row-gap: 30px;
   width: 100%;
+  padding: 0 2px;
 }
 
 .books-cards .card {
@@ -114,6 +115,11 @@ body {
 .books-cards .card img {
   width: 100%;
   height: 70%;
+}
+
+.card:hover {
+  cursor: pointer;
+  outline: 3px solid #73777B;
 }
 
 .card .book-card-title {
@@ -262,17 +268,86 @@ body {
   overflow: hidden;
 }
 
-.books-body-wrapper .books-page-wrapper .books-page-cards .cards-category-title {
+.title-line {
   font-size: 25px;
   font-weight: 300;
   margin-bottom: 30px;
 }
 
-.books-body-wrapper .books-page-wrapper .books-page-cards .cards-category-title::after {
+.title-line::after {
   content: "";
   width: 100vw;
   height: 3px;
   background-color: #EC994B;
   display: block;
+}
+
+.single-book-page-wrapper {
+  padding: 40px 0;
+  display: none;
+  overflow: hidden;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper {
+  display: flex;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper .book-photo {
+  width: 25%;
+  margin: 0 40px 40px 0;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper .book-photo img {
+  width: 100%;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper .book-info {
+  overflow: hidden;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper .book-info .book-info-title {
+  font-weight: 500;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper .book-info .info {
+  font-weight: 300;
+  margin-bottom: 30px;
+  font-size: 18px;
+  display: flex;
+}
+
+.single-book-page-wrapper .book-info-wrapper .book-wrapper .book-info .info span {
+  margin-left: 30px;
+  font-style: italic;
+  font-size: 18px;
+}
+
+.single-book-page-wrapper .book-info-wrapper .single-book-description-wrapper {
+  overflow: hidden;
+}
+
+.single-book-page-wrapper .book-info-wrapper .single-book-description-wrapper .single-book-desc-title {
+  font-weight: 500;
+}
+
+.single-book-page-wrapper .book-info-wrapper .single-book-description-wrapper .single-book-desc-text {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 200;
+  margin-bottom: 30px;
+}
+
+.single-book-page-wrapper .book-info-wrapper .single-book-description-wrapper .btn-back {
+  font-size: 18px;
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: #73777B;
+  color: #fff;
+  border: none;
+}
+
+.single-book-page-wrapper .book-info-wrapper .single-book-description-wrapper .btn-back:hover {
+  background-color: #fff;
+  color: #73777B;
 }
 /*# sourceMappingURL=design.css.map */
