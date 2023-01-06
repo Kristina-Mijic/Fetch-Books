@@ -11,9 +11,10 @@ let allBooksMenu = document.getElementById('all-books-menu');
 let menuGenreItemsWraper = document.getElementById('genre-menu-items');
 let singleBookWrapper = document.getElementById('single-book-wrapper');
 
-
 let data = [];
 let dataApiOriginal = [];
+let previousPage = '';
+
 
 let copyApiArr = (inArr) => {
   let arr = [];
@@ -51,7 +52,7 @@ let getRandomFourElem = (inArr) => {
   for(let i = 0; i < 4; i++) {
     let index = Math.floor(Math.random() * arrCopy.length);
     newItems.push(arrCopy[index]);
-    arrCopy.slice(index, 1);
+    arrCopy.splice(index, 1);
   }
   return newItems;
 }
@@ -77,7 +78,7 @@ let sortArrayOnRating = (sort) => {
 
 
 
-let fetchData = async() => {
+let fetchData = async(filterByGenre) => {
   const response = await fetch(
     'https://api.jsonbin.io/v3/b/63a0e753dfc68e59d56c71ec/latest',
     {
@@ -97,6 +98,12 @@ let fetchData = async() => {
 
   let templateCardsNewBooks = templateBooks(copyDataApi);
   let templateSellingBooks = templateBooks(apiRating);
+
+  if(filterByGenre !== '') {
+    dataApiOriginal = dataApiOriginal.filter(data => data.genre.
+    indexOf(filterByGenre) > 0)
+  }
+  
   let templatePageAllCards = templateBooks(dataApiOriginal);
   let templateGenreItems = templateGenreItemsInMenu(genreItem);
 
@@ -105,9 +112,10 @@ let fetchData = async() => {
   pageBooksCards.innerHTML = templatePageAllCards;
   menuGenreItemsWraper.innerHTML = templateGenreItems;
   openSingleBookPage()
+  filterGenre()
   
 };
-fetchData();
+fetchData('');
 
 
 
@@ -142,9 +150,23 @@ let templateGenreItemsInMenu = (data) => {
     <a class="content">${e}</a>
    `
   })
-  
   return templategenreItems;
 }
+
+
+//Filter genre on books page:
+let filterGenre = () => {
+  let genreContent = document.querySelectorAll('.content');
+
+  genreContent.forEach(item => {
+    item.addEventListener('click', (e) => {
+      pageBooksCards.innerHTML = ''
+      let itemGenre = e.target.firstChild.nodeValue;
+      
+      fetchData(itemGenre);
+    })
+  }) 
+};
 
 
 //Create template for single book page:
@@ -176,17 +198,20 @@ let templateSingleBookPage = (dataParamId) => {
   return templateSingleBook;
 }
 
+
 //Open Single Book page:
 let openSingleBookPage = () => {
   let cardsBook = document.querySelectorAll('.card');
 
   cardsBook.forEach(card => {
     card.addEventListener('click', (e) => {
-      homeBodyWrapper.style.display = 'none';
       singleBookWrapper.style.display = 'flex';
+      homeBodyWrapper.style.display = 'none';
       booksPageBodyWrapper.style.display = 'none';
+      
       let cardId = e.target.id;
       singleBookWrapper.innerHTML = templateSingleBookPage(cardId);
+
       backPreviousPage()
     })
   })
@@ -197,9 +222,17 @@ let backPreviousPage = () => {
   let btnBack = document.getElementById('btn-back');
 
   btnBack.addEventListener('click', () => {
-    console.log('click')
-    singleBookWrapper.style.display = 'none';
-    homeBodyWrapper.style.display = 'flex';
+    console.log(previousPage)
+    if(previousPage === "Books page") {
+      booksPageBodyWrapper.style.display = 'flex';
+      homeBodyWrapper.style.delay = 'none'
+      singleBookWrapper.style.display = 'none'
+    }
+    else {
+      homeBodyWrapper.style.display = 'flex';
+      singleBookWrapper.style.display = 'none'
+      booksPageBodyWrapper.style.display = 'none';
+    }
   })
 }
 
@@ -207,13 +240,17 @@ homePage.addEventListener('click', () => {
   homeBodyWrapper.style.display = 'grid';
   booksPageBodyWrapper.style.display = 'none';
   singleBookWrapper.style.display = 'none';
+
+  previousPage = 'Home page';
 });
 
 
 booksPage.addEventListener('click', () => {
-  homeBodyWrapper.style.display = 'none';
   booksPageBodyWrapper.style.display = 'block';
+  homeBodyWrapper.style.display = 'none';
   singleBookWrapper.style.display = 'none';
+
+  previousPage = 'Books page';
 });
 
 
